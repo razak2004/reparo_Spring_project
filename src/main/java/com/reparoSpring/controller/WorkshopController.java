@@ -15,7 +15,7 @@ public class WorkshopController {
 
     private final WorkshopService workshopService =  new WorkshopService();
 
-
+//workshop map 
     @PostMapping("/createWorkshop")
     public ResponseEntity<String>createWorkShop(@RequestBody WorkshopRequestDto request){
         try {
