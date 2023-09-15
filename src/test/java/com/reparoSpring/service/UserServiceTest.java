@@ -4,6 +4,7 @@ package com.reparoSpring.service;
 import com.reparoSpring.dto.user.UserRequestDto;
 import com.reparoSpring.exception.ServiceException;
 import com.reparoSpring.repository.UserRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,15 +17,28 @@ class UserServiceTest {
 private UserRepository userRepository;
 @Autowired
 private  UserService userService;
+//    @Test
+//    void saveUser(){
+//        UserRequestDto use = new UserRequestDto("abdul",9789068945L,"abd123",2);
+//        try {
+//           int id = userService.createUser(use);
+//            assertNotNull(userRepository.findById(id));
+//        } catch (ServiceException e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
     @Test
-    void saveUser(){
-        UserRequestDto use = new UserRequestDto("abdul",9789068945L,"abd123",2);
+    void loginUser(){
+                UserRequestDto use = new UserRequestDto();
+                use.setPassword("abc123");
+                use.setNumber(9840326198L);
         try {
-           int id = userService.createUser(use);
-            assertNotNull(userRepository.findById(id));
+          Assertions.assertNotNull(userService.loginUser(use));
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }
+
 
     }
 }

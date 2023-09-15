@@ -20,6 +20,7 @@ public class UserResponseDto extends UserDto {
         this.number = number;
         this.role =  role;
     }
+    public UserResponseDto(){}
 
     public String getName() {
         return name;

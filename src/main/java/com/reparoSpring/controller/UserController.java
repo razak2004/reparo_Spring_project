@@ -37,5 +37,16 @@ private  UserService userService ;
         }
 
     }
+    @PostMapping("/loginUser")
+    public ResponseEntity<String> loginUser(@RequestBody UserRequestDto requestDto){
+        try {
+            UserResponseDto responseDto =  userService.loginUser(requestDto);
+            return ResponseEntity.ok(responseDto.toString());
+
+        }catch (ServiceException e ){
+            return ResponseEntity.ok(e.getMessage());
+
+        }
+    }
 
 }

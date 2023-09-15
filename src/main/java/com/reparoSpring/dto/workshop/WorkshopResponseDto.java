@@ -5,7 +5,7 @@ public class WorkshopResponseDto {
     private int userId;
     private int workshopId;
     private String workshopName;
-    private String image;
+        private String image;
     private String city;
     private String state;
     private String country;

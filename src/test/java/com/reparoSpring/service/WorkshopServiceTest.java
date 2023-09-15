@@ -16,7 +16,7 @@ public class WorkshopServiceTest {
     @Test
     void saveWorkshop(){
         WorkshopRequestDto requestDto =  new WorkshopRequestDto();
-        requestDto.setUserId(702);
+        requestDto.setUserId(1002);
         requestDto.setCity("chennai");
         requestDto.setState("tamilNadu");
         requestDto.setCountry("India");

@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/workshop")
 @CrossOrigin(origins = "http://127.0.0.1:5501")
 public class WorkshopController {
+@Autowired
+private  WorkshopService workshopService;
 
-    private final WorkshopService workshopService =  new WorkshopService();
-
-//workshop map 
     @PostMapping("/createWorkshop")
-    public ResponseEntity<String>createWorkShop(@RequestBody WorkshopRequestDto request){
+    public ResponseEntity<String>createWorkShop(@RequestBody WorkshopRequestDto request,@RequestParam int userId){
+        request.setUserId(userId);
         try {
           int id =  workshopService.createWorkshop(request);
             return ResponseEntity.ok(Integer.toString(id));
@@ -27,6 +27,10 @@ public class WorkshopController {
 
         }
 
+    }
+    @GetMapping("/hello")
+    public String hello(){
+        return "hello";
     }
 
 

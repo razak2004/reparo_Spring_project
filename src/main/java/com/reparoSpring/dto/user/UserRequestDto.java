@@ -7,6 +7,10 @@ public class UserRequestDto extends UserResponseDto {
         super( name, number,role);
         this.password = pass;
     }
+    public  UserRequestDto(){
+        super();
+
+    }
 
 
     public String getPassword() {

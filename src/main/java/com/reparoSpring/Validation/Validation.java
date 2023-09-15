@@ -1,5 +1,6 @@
 package com.reparoSpring.Validation;
 
+import com.reparoSpring.dto.user.UserRequestDto;
 import com.reparoSpring.exception.ValidationException;
 import com.reparoSpring.model.User;
 import com.reparoSpring.model.Workshop;
@@ -110,6 +111,15 @@ public class Validation {
         // Validate the user's number using numberValidation method
         numberValidation(user.getNumber());
     }
+    public void loginCredentialValidation(UserRequestDto user) throws ValidationException {
+        // Validate the user's password using passWordValidation method
+        passWordValidation(user.getPassword());
+
+        // Validate the user's number using numberValidation method
+        numberValidation(user.getNumber());
+    }
+
+
     public void workshopValidation(Workshop work) throws ValidationException{
         stringValidation(work.getWorkShopName(),"workshopName",25);
         stringValidation(work.getCity(),"city",15);

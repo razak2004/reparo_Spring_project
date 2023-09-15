@@ -14,6 +14,7 @@ public class User {
     private long number;
     private String name ;
     private String password;
+    private boolean login;
     public User(){}
 
     public int getId() {
@@ -54,5 +55,13 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isLogin() {
+        return login;
+    }
+
+    public void setLogin(boolean login) {
+        this.login = login;
     }
 }

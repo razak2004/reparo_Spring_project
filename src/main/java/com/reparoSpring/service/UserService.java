@@ -22,13 +22,13 @@ public class UserService{
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+    private final UserMapper map = new UserMapper();
+    private final Validation validate =  new Validation();
 
     public int createUser(UserRequestDto userDto) throws ServiceException{
-        Validation validation = new Validation();
-        UserMapper  map =  new UserMapper();
         try {
             User user = map.mapRequestDtoToUser(userDto);
-            validation.userCredentialValidation(user);
+            validate.userCredentialValidation(user);
             int id = 0 ;
             if(userRepository!=null){
                 User existUser =  userRepository.findUserByNumber(user.getNumber());
@@ -51,8 +51,28 @@ public class UserService{
             if(existUser==null)throw new ServiceException("User not present");
             user = existUser;
         }
-        UserMapper map = new UserMapper();
+
         return map.mapUserToResponse(user);
+
+    }
+    public UserResponseDto loginUser(UserRequestDto request) throws ServiceException{
+        try {
+            validate.loginCredentialValidation(request);
+            User user = new User();
+            if (userRepository != null) {
+                User existUser = userRepository.findUserByNumber(request.getNumber());
+                if(existUser==null)throw new ServiceException("User not present");
+                if(!(existUser.getPassword().equals(request.getPassword())))throw new ServiceException("number or password is incorrect");
+                user = existUser;
+                user.setLogin(true);
+                userRepository.save(user);
+            }
+
+            return map.mapUserToResponse(user);
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
+        }
+
 
     }
 
