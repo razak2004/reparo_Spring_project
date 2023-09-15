@@ -41,4 +41,12 @@ private  UserService userService;
 
 
     }
+    @Test
+    void findUserByIdTest(){
+        try {
+            Assertions.assertNotNull(userService.findUserById(2));
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

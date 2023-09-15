@@ -4,11 +4,15 @@ import com.reparoSpring.dto.user.UserRequestDto;
 import com.reparoSpring.exception.ValidationException;
 import com.reparoSpring.model.User;
 import com.reparoSpring.model.Workshop;
+import com.reparoSpring.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validation {
+    @Autowired
+    private UserRepository userRepository;
 
     private static  final String STRING_REGEX = "^[A-Za-z\\s]+$";
     private static  final String PASS = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,10}$";
@@ -135,6 +139,16 @@ public class Validation {
         if(!doesNotContainAlphabets(work.getCloseTime()))throw new ValidationException("closeTime shouldn't contain Alphabets");
         if(!isValidLatitude(work.getLatitude()))throw new ValidationException("Invalid Latitude");
         if(!isValidLongitude(work.getLongitude()))throw new ValidationException("Invalid Longitude");
+    }
+
+    public boolean isUserExist(int id) throws ValidationException{
+        User user =  new User();
+        if(userRepository !=  null){
+            user =  userRepository.findUserById(id);
+            if(user ==  null)throw  new ValidationException("User Not present");
+        }
+        return user.getId()!= 0;
+
     }
 
 

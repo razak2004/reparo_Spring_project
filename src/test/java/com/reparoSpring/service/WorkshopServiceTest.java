@@ -38,9 +38,5 @@ public class WorkshopServiceTest {
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }
-
-
     }
-
-
 }

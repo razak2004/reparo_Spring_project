@@ -3,6 +3,7 @@ package com.reparoSpring.service;
 import com.reparoSpring.Validation.Validation;
 import com.reparoSpring.datamapper.WorkshopMapper;
 import com.reparoSpring.dto.workshop.WorkshopRequestDto;
+import com.reparoSpring.dto.workshop.WorkshopResponseDto;
 import com.reparoSpring.exception.ServiceException;
 import com.reparoSpring.exception.ValidationException;
 import com.reparoSpring.model.User;
@@ -12,14 +13,17 @@ import com.reparoSpring.repository.WorkshopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class WorkshopService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private WorkshopRepository workshopRepository;
-
-    private final Validation validation =  new Validation();
+    @Autowired
+    private  Validation validation;
 
     private final WorkshopMapper map =  new WorkshopMapper();
 
@@ -29,8 +33,8 @@ public class WorkshopService {
         try {
             validation.workshopValidation(workshop);
             if(userRepository!=null&&workshopRepository!=null){
+                validation.isUserExist(dto.getUserId());
                 User user = userRepository.findUserById(dto.getUserId());
-                if(user==null)throw new ServiceException(" User not present ");
                 workshop.setUser(user);
              Workshop work = workshopRepository.save(workshop);
              id = work.getWorkShopId();
@@ -40,5 +44,23 @@ public class WorkshopService {
         }
         return  id;
     }
+    public List<WorkshopResponseDto> getAllWorkshops(int id)throws ServiceException{
+        try {
+            List<WorkshopResponseDto> workshops =  new ArrayList<>();
+            validation.isUserExist(id);
+            if(workshopRepository!=null){
+                List<Workshop> workshops1 =  workshopRepository.getAllWorkshop();
+                for (Workshop work :workshops1) {
+                    workshops.add(map.mapWorkshopToResponse(work));
+                }
+
+            }
+            return workshops;
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
+        }
+
+    }
+
 
 }

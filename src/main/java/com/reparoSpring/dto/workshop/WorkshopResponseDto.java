@@ -1,11 +1,14 @@
 package com.reparoSpring.dto.workshop;
 
+import com.reparoSpring.dto.user.UserResponseDto;
+
 public class WorkshopResponseDto {
 
     private int userId;
+    private UserResponseDto user;
     private int workshopId;
     private String workshopName;
-        private String image;
+    private String image;
     private String city;
     private String state;
     private String country;
@@ -145,5 +148,13 @@ public class WorkshopResponseDto {
 
     public void setEnginePrice(int enginePrice) {
         this.enginePrice = enginePrice;
+    }
+
+    public UserResponseDto getUser() {
+        return user;
+    }
+
+    public void setUser(UserResponseDto user) {
+        this.user = user;
     }
 }

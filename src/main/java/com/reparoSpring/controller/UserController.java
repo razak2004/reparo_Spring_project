@@ -37,6 +37,19 @@ private  UserService userService ;
         }
 
     }
+    @GetMapping("/findById")
+    public ResponseEntity<String>getUserById(@RequestParam("id") int id){
+        try {
+            UserResponseDto resp = userService.findUserById(id);
+            return ResponseEntity.ok(resp.toString());
+        } catch (ServiceException e) {
+            return ResponseEntity.ok(e.getMessage());
+        }
+
+    }
+
+
+
     @PostMapping("/loginUser")
     public ResponseEntity<String> loginUser(@RequestBody UserRequestDto requestDto){
         try {

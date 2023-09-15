@@ -75,5 +75,20 @@ public class UserService{
 
 
     }
+    public UserResponseDto findUserById(int id) throws  ServiceException{
+        try {
+            UserResponseDto  dto  =  new UserResponseDto();
+            if(userRepository != null){
+                User user = userRepository.findUserById(id);
+                if(user == null)throw new ServiceException("User not present ");
+                dto = map.mapUserToResponse(user);
+
+
+            }
+            return dto;
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
 
 }
