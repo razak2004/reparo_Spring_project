@@ -8,9 +8,9 @@ import java.util.List;
 
 
 public interface WorkshopRepository extends JpaRepository<Workshop,Integer> {
-    List<Workshop> getAllWorkshop();
-    Workshop findWorkshopById(int id);
-    Workshop findWorkshopByUserId(int userId);
+    List<Workshop> findAll();
+    Workshop findById(int workshopId);
+    Workshop findByUserId(int userId);
 
 
 }

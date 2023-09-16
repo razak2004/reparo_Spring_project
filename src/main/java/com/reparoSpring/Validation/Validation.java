@@ -141,15 +141,7 @@ public class Validation {
         if(!isValidLongitude(work.getLongitude()))throw new ValidationException("Invalid Longitude");
     }
 
-    public boolean isUserExist(int id) throws ValidationException{
-        User user =  new User();
-        if(userRepository !=  null){
-            user =  userRepository.findUserById(id);
-            if(user ==  null)throw  new ValidationException("User Not present");
-        }
-        return user.getId()!= 0;
 
-    }
 
 
 

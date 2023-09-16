@@ -22,10 +22,17 @@ public class WorkshopService {
     private UserRepository userRepository;
     @Autowired
     private WorkshopRepository workshopRepository;
+
     @Autowired
-    private  Validation validation;
+    private UserService userService;
+
+
+    private final Validation validation = new Validation();
+
 
     private final WorkshopMapper map =  new WorkshopMapper();
+
+
 
     public int createWorkshop(WorkshopRequestDto dto) throws ServiceException{
         int id = 0 ;
@@ -33,7 +40,7 @@ public class WorkshopService {
         try {
             validation.workshopValidation(workshop);
             if(userRepository!=null&&workshopRepository!=null){
-                validation.isUserExist(dto.getUserId());
+                userService.isUserExist(dto.getUserId());
                 User user = userRepository.findUserById(dto.getUserId());
                 workshop.setUser(user);
              Workshop work = workshopRepository.save(workshop);
@@ -47,9 +54,9 @@ public class WorkshopService {
     public List<WorkshopResponseDto> getAllWorkshops(int id)throws ServiceException{
         try {
             List<WorkshopResponseDto> workshops =  new ArrayList<>();
-            validation.isUserExist(id);
+            userService.isUserExist(id);
             if(workshopRepository!=null){
-                List<Workshop> workshops1 =  workshopRepository.getAllWorkshop();
+                List<Workshop> workshops1 =  workshopRepository.findAll();
                 for (Workshop work :workshops1) {
                     workshops.add(map.mapWorkshopToResponse(work));
                 }

@@ -24,6 +24,15 @@ public class UserService{
     }
     private final UserMapper map = new UserMapper();
     private final Validation validate =  new Validation();
+    public boolean isUserExist(int id) throws ServiceException{
+        User user =  new User();
+        if(userRepository !=  null){
+            user =  userRepository.findUserById(id);
+            if(user ==  null)throw  new ServiceException("User Not present");
+        }
+        return user.getId()!= 0;
+
+    }
 
     public int createUser(UserRequestDto userDto) throws ServiceException{
         try {
