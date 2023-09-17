@@ -21,7 +21,7 @@ public class Validation {
     private static  final String ADDRESS_PATTERN = "^[a-zA-Z0-9\\s.,'#\\-]+(\\s[A-Za-z0-9\\-#]+)?$";
     private static final String VEHICLE_NUMBER_PATTERN = "^[A-Z]{2}\\d{2}[A-Z]{2}\\d{4}$";
 
-    public void stringValidation(String str, String name, int n) throws ValidationException {
+    public boolean stringValidation(String str, String name, int n) throws ValidationException {
         // Define a regular expression pattern for validating the string
         Pattern pat = Pattern.compile(STRING_REGEX);
 
@@ -44,15 +44,17 @@ public class Validation {
         if (!match.matches()) {
             throw new ValidationException(name + " can only contain alphabetic characters");
         }
+        return match.matches();
     }
-    public void numberValidation(long number) throws ValidationException {
+    public boolean numberValidation(long number) throws ValidationException {
         // Convert the long number to a string for validation
         String str = Long.toString(number);
 
         // Check if the length of the converted string is greater than 10 digits
-        if (str.length() > 10) {
-            throw new ValidationException("Number should not be more than 10 digits");
+        if (str.length() != 10) {
+            throw new ValidationException("Number should not be more or less than 10 digits");
         }
+        return true;
 
     }
 
@@ -102,13 +104,14 @@ public class Validation {
     public boolean vehicleTypeValidation(int i ){
         return i == 2 || i == 3 || i == 4;
     }
-    public void priceValidation(int price) throws ValidationException{
+    public boolean priceValidation(int price) throws ValidationException{
         if(price>9999){
             throw new ValidationException("price can't be more than 4 digits");
         }
         if(price<=0){
             throw new ValidationException("price can't be less than 0 or  0");
         }
+        return price < 9999;
     }
     public boolean doesNotContainAlphabets(String input) {
         // Use a regular expression to check if the string contains no alphabetic characters
@@ -123,26 +126,21 @@ public class Validation {
             else return true;
         }
 
-    public void userCredentialValidation(User user) throws ValidationException {
-        // Validate the user's name using stringValidation method
-        stringValidation(user.getName(), "name", 15);
+    public boolean userCredentialValidation(User user) throws ValidationException {
 
+        return stringValidation(user.getName(), "name", 15) && passWordValidation(user.getPassword()) &&  numberValidation(user.getNumber());
+    }
+    public boolean loginCredentialValidation(UserRequestDto user) throws ValidationException {
         // Validate the user's password using passWordValidation method
-        passWordValidation(user.getPassword());
+
 
         // Validate the user's number using numberValidation method
         numberValidation(user.getNumber());
-    }
-    public void loginCredentialValidation(UserRequestDto user) throws ValidationException {
-        // Validate the user's password using passWordValidation method
-        passWordValidation(user.getPassword());
-
-        // Validate the user's number using numberValidation method
-        numberValidation(user.getNumber());
+        return passWordValidation(user.getPassword())&& numberValidation(user.getNumber());
     }
 
 
-    public void workshopValidation(Workshop work) throws ValidationException{
+    public boolean workshopValidation(Workshop work) throws ValidationException{
         stringValidation(work.getWorkShopName(),"workshopName",25);
         stringValidation(work.getCity(),"city",15);
         stringValidation(work.getState(),"state",15);
@@ -157,13 +155,15 @@ public class Validation {
         if(!doesNotContainAlphabets(work.getCloseTime()))throw new ValidationException("closeTime shouldn't contain Alphabets");
         if(!isValidLatitude(work.getLatitude()))throw new ValidationException("Invalid Latitude");
         if(!isValidLongitude(work.getLongitude()))throw new ValidationException("Invalid Longitude");
+        return true;
     }
-    public void vehicleCredentialValidation(Vehicle vehicle) throws ValidationException{
+    public boolean vehicleCredentialValidation(Vehicle vehicle) throws ValidationException{
         stringValidation(vehicle.getCompany(), "company",15);
         stringValidation(vehicle.getModel(), "model",15);
         vehicleNumberValidation(vehicle.getVehicleNumber());
         vehicleTypeValidation(vehicle.getType());
         vehicleYearValidation(vehicle.getYear());
+        return true ;
     }
 
 }
