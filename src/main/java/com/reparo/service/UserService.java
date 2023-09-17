@@ -1,6 +1,6 @@
 package com.reparo.service;
 
-import com.reparo.Validation.Validation;
+import com.reparo.validation.Validation;
 import com.reparo.datamapper.UserMapper;
 import com.reparo.dto.user.UserRequestDto;
 import com.reparo.dto.user.UserResponseDto;

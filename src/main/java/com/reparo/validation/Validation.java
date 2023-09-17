@@ -1,4 +1,4 @@
-package com.reparo.Validation;
+package com.reparo.validation;
 
 import com.reparo.dto.user.UserRequestDto;
 import com.reparo.exception.ValidationException;

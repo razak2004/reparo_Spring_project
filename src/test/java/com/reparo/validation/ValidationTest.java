@@ -1,20 +1,17 @@
 package com.reparo.validation;
 
-import com.reparo.Validation.Validation;
 import com.reparo.dto.user.UserRequestDto;
 import com.reparo.exception.ValidationException;
 
 import com.reparo.model.User;
 import com.reparo.model.Vehicle;
 import com.reparo.model.Workshop;
-import org.hibernate.jdbc.Work;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ValidationTest {
+ class ValidationTest {
 
     private final Validation validate = new Validation() ;
 

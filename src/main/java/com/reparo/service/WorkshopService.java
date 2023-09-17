@@ -1,6 +1,6 @@
 package com.reparo.service;
 
-import com.reparo.Validation.Validation;
+import com.reparo.validation.Validation;
 import com.reparo.datamapper.WorkshopMapper;
 import com.reparo.dto.workshop.WorkshopRequestDto;
 import com.reparo.dto.workshop.WorkshopResponseDto;

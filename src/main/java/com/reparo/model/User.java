@@ -15,7 +15,9 @@ public class User {
     private String name ;
     private String password;
     private boolean login;
-    public User(){}
+    public User(){
+
+    } // default constructor 
 
     public int getId() {
         return id;
