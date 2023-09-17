@@ -35,7 +35,7 @@ private  WorkshopService workshopService;
     public ResponseEntity<List<WorkshopResponseDto>> getAllWorkshops(@RequestParam int id){
         try {
          List<WorkshopResponseDto> workshops  =  workshopService.getAllWorkshops(id);
-         return ResponseEntity.ok(workshops);
+         return ResponseEntity.ok(workshops); 
         } catch (ServiceException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }

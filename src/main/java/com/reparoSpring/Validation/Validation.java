@@ -3,10 +3,12 @@ package com.reparoSpring.Validation;
 import com.reparoSpring.dto.user.UserRequestDto;
 import com.reparoSpring.exception.ValidationException;
 import com.reparoSpring.model.User;
+import com.reparoSpring.model.Vehicle;
 import com.reparoSpring.model.Workshop;
 import com.reparoSpring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -83,6 +85,13 @@ public class Validation {
 
 
     }
+    public boolean vehicleNumberValidation(String num ) throws  ValidationException{
+        Matcher match;
+            Pattern pat = Pattern.compile(VEHICLE_NUMBER_PATTERN);
+            match = pat.matcher(num);
+        if(!match.matches()) throw new ValidationException("Vehicle number should be Alphanumeric characters");
+        return match.matches();
+    }
     public boolean isValidLatitude(double latitude) {
         return latitude >= -90.0 && latitude <= 90.0;
     }
@@ -90,7 +99,7 @@ public class Validation {
     public boolean isValidLongitude(double longitude) {
         return longitude >= -180.0 && longitude <= 180.0;
     }
-    public boolean workshopTypeValidation(int i ){
+    public boolean vehicleTypeValidation(int i ){
         return i == 2 || i == 3 || i == 4;
     }
     public void priceValidation(int price) throws ValidationException{
@@ -105,6 +114,15 @@ public class Validation {
         // Use a regular expression to check if the string contains no alphabetic characters
         return input != null && !input.matches(".*[a-zA-Z].*");
     }
+    public boolean vehicleYearValidation(int yr) throws ValidationException {
+            String year = Integer.toString(yr);
+            if (year.length() != 4)  throw new ValidationException("Year Can't be more or less than 4 digits");
+            LocalDate currentDate = LocalDate.now();
+            int currentYear = currentDate.getYear();
+            if(yr>currentYear) throw new ValidationException("Year Can't be in future");
+            else return true;
+        }
+
     public void userCredentialValidation(User user) throws ValidationException {
         // Validate the user's name using stringValidation method
         stringValidation(user.getName(), "name", 15);
@@ -130,7 +148,7 @@ public class Validation {
         stringValidation(work.getState(),"state",15);
         stringValidation(work.getCountry(),"country",15);
         addressValidation(work.getAddress());
-        if(!workshopTypeValidation(work.getType()))throw new ValidationException("Invalid Vehicle Type");
+        if(!vehicleTypeValidation(work.getType()))throw new ValidationException("Invalid Vehicle Type");
         priceValidation(work.getElectricalPrice());
         priceValidation(work.getEnginePrice());
         priceValidation(work.getSuspensionPrice());
@@ -140,10 +158,12 @@ public class Validation {
         if(!isValidLatitude(work.getLatitude()))throw new ValidationException("Invalid Latitude");
         if(!isValidLongitude(work.getLongitude()))throw new ValidationException("Invalid Longitude");
     }
-
-
-
-
-
+    public void vehicleCredentialValidation(Vehicle vehicle) throws ValidationException{
+        stringValidation(vehicle.getCompany(), "company",15);
+        stringValidation(vehicle.getModel(), "model",15);
+        vehicleNumberValidation(vehicle.getVehicleNumber());
+        vehicleTypeValidation(vehicle.getType());
+        vehicleYearValidation(vehicle.getYear());
+    }
 
 }
