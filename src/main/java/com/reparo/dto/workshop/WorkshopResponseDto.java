@@ -8,19 +8,19 @@ public class WorkshopResponseDto {
     private UserResponseDto user;
     private int workshopId;
     private String workshopName;
-    private String image;
-    private String city;
-    private String state;
-    private String country;
-    private String address;
+    private String workshopImage;
+    private String workshopCity;
+    private String workshopState;
+    private String workshopCountry;
+    private String workshopAddress;
 
-    private int type;
-    private String openTime;
-    private String closeTime;
-    private int generalPrice;
-    private int electricalPrice;
-    private int suspensionPrice;
-    private int enginePrice;
+    private int workshopType;
+    private String workshopOpenTime;
+    private String workshopCloseTime;
+    private int generalServicePrice;
+    private int electricalServicePrice;
+    private int suspensionServicePrice;
+    private int engineServicePrice;
 
     // Constructor
     public WorkshopResponseDto() {
@@ -52,102 +52,102 @@ public class WorkshopResponseDto {
         this.workshopName = workshopName;
     }
 
-    public String getImage() {
-        return image;
+    public String getWorkshopImage() {
+        return workshopImage;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setWorkshopImage(String image) {
+        this.workshopImage = image;
     }
 
-    public String getCity() {
-        return city;
+    public String getWorkshopCity() {
+        return workshopCity;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setWorkshopCity(String city) {
+        this.workshopCity = city;
     }
 
-    public String getState() {
-        return state;
+    public String getWorkshopState() {
+        return workshopState;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setWorkshopState(String state) {
+        this.workshopState = state;
     }
 
-    public String getCountry() {
-        return country;
+    public String getWorkshopCountry() {
+        return workshopCountry;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setWorkshopCountry(String country) {
+        this.workshopCountry = country;
     }
 
-    public String getAddress() {
-        return address;
+    public String getWorkshopAddress() {
+        return workshopAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setWorkshopAddress(String address) {
+        this.workshopAddress = address;
     }
 
 
 
-    public int getType() {
-        return type;
+    public int getWorkshopType() {
+        return workshopType;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setWorkshopType(int type) {
+        this.workshopType = type;
     }
 
-    public String getOpenTime() {
-        return openTime;
+    public String getWorkshopOpenTime() {
+        return workshopOpenTime;
     }
 
-    public void setOpenTime(String openTime) {
-        this.openTime = openTime;
+    public void setWorkshopOpenTime(String openTime) {
+        this.workshopOpenTime = openTime;
     }
 
-    public String getCloseTime() {
-        return closeTime;
+    public String getWorkshopCloseTime() {
+        return workshopCloseTime;
     }
 
-    public void setCloseTime(String closeTime) {
-        this.closeTime = closeTime;
+    public void setWorkshopCloseTime(String closeTime) {
+        this.workshopCloseTime = closeTime;
     }
 
-    public int getGeneralPrice() {
-        return generalPrice;
+    public int getGeneralServicePrice() {
+        return generalServicePrice;
     }
 
-    public void setGeneralPrice(int generalPrice) {
-        this.generalPrice = generalPrice;
+    public void setGeneralServicePrice(int generalPrice) {
+        this.generalServicePrice = generalPrice;
     }
 
-    public int getElectricalPrice() {
-        return electricalPrice;
+    public int getElectricalServicePrice() {
+        return electricalServicePrice;
     }
 
-    public void setElectricalPrice(int electricalPrice) {
-        this.electricalPrice = electricalPrice;
+    public void setElectricalServicePrice(int electricalPrice) {
+        this.electricalServicePrice = electricalPrice;
     }
 
-    public int getSuspensionPrice() {
-        return suspensionPrice;
+    public int getSuspensionServicePrice() {
+        return suspensionServicePrice;
     }
 
-    public void setSuspensionPrice(int suspensionPrice) {
-        this.suspensionPrice = suspensionPrice;
+    public void setSuspensionServicePrice(int suspensionPrice) {
+        this.suspensionServicePrice = suspensionPrice;
     }
 
-    public int getEnginePrice() {
-        return enginePrice;
+    public int getEngineServicePrice() {
+        return engineServicePrice;
     }
 
-    public void setEnginePrice(int enginePrice) {
-        this.enginePrice = enginePrice;
+    public void setEngineServicePrice(int enginePrice) {
+        this.engineServicePrice = enginePrice;
     }
 
     public UserResponseDto getUser() {

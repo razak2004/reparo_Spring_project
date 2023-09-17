@@ -9,20 +9,20 @@ public class WorkshopMapper {
     public Workshop mapRequestToWorkshop(WorkshopRequestDto data){
         Workshop workshop = new Workshop();
         workshop.setWorkShopName(data.getWorkshopName());
-        workshop.setImage(data.getImage());
-        workshop.setCity(data.getCity());
-        workshop.setState(data.getState());
-        workshop.setCountry(data.getCountry());
-        workshop.setAddress(data.getAddress());
+        workshop.setImage(data.getWorkshopImage());
+        workshop.setCity(data.getWorkshopCity());
+        workshop.setState(data.getWorkshopState());
+        workshop.setCountry(data.getWorkshopCountry());
+        workshop.setAddress(data.getWorkshopAddress());
         workshop.setLatitude(data.getLatitude());
         workshop.setLongitude(data.getLongitude());
-        workshop.setType(data.getType());
-        workshop.setOpenTime(data.getOpenTime());
-        workshop.setCloseTime(data.getCloseTime());
-        workshop.setGeneralPrice(data.getGeneralPrice());
-        workshop.setElectricalPrice(data.getElectricalPrice());
-        workshop.setEnginePrice(data.getEnginePrice());
-        workshop.setSuspensionPrice(data.getSuspensionPrice());
+        workshop.setType(data.getWorkshopType());
+        workshop.setOpenTime(data.getWorkshopOpenTime());
+        workshop.setCloseTime(data.getWorkshopCloseTime());
+        workshop.setGeneralPrice(data.getGeneralServicePrice());
+        workshop.setElectricalPrice(data.getElectricalServicePrice());
+        workshop.setEnginePrice(data.getEngineServicePrice());
+        workshop.setSuspensionPrice(data.getSuspensionServicePrice());
         return workshop;
     }
     public WorkshopResponseDto mapWorkshopToResponse(Workshop workshop){
@@ -31,18 +31,18 @@ public class WorkshopMapper {
         workshopResponseDto.setUserId(workshop.getUser().getId());
         workshopResponseDto.setUser(map.mapUserToResponse(workshop.getUser()));
         workshopResponseDto.setWorkshopName(workshop.getWorkShopName());
-        workshopResponseDto.setImage(workshop.getImage());
-        workshopResponseDto.setCity(workshop.getCity());
-        workshopResponseDto.setState(workshop.getState());
-        workshopResponseDto.setCountry(workshop.getCountry());
-        workshopResponseDto.setAddress(workshop.getAddress());
-        workshopResponseDto.setType(workshop.getType());
-        workshopResponseDto.setOpenTime(workshop.getOpenTime());
-        workshopResponseDto.setCloseTime(workshop.getCloseTime());
-        workshopResponseDto.setGeneralPrice(workshop.getGeneralPrice());
-        workshopResponseDto.setElectricalPrice(workshop.getElectricalPrice());
-        workshopResponseDto.setEnginePrice(workshop.getEnginePrice());
-        workshopResponseDto.setSuspensionPrice(workshop.getSuspensionPrice());
+        workshopResponseDto.setWorkshopImage(workshop.getImage());
+        workshopResponseDto.setWorkshopCity(workshop.getCity());
+        workshopResponseDto.setWorkshopState(workshop.getState());
+        workshopResponseDto.setWorkshopCountry(workshop.getCountry());
+        workshopResponseDto.setWorkshopAddress(workshop.getAddress());
+        workshopResponseDto.setWorkshopType(workshop.getType());
+        workshopResponseDto.setWorkshopOpenTime(workshop.getOpenTime());
+        workshopResponseDto.setWorkshopCloseTime(workshop.getCloseTime());
+        workshopResponseDto.setGeneralServicePrice(workshop.getGeneralPrice());
+        workshopResponseDto.setElectricalServicePrice(workshop.getElectricalPrice());
+        workshopResponseDto.setEngineServicePrice(workshop.getEnginePrice());
+        workshopResponseDto.setSuspensionServicePrice(workshop.getSuspensionPrice());
         return workshopResponseDto;
     }
 
