@@ -6,7 +6,7 @@ import com.reparo.model.Vehicle;
 public class VehicleMapper {
 
     public Vehicle mapRequestToVehicle(VehicleRequestDto dto){
-        return new Vehicle(dto.getType(), dto.getVehicleNumber(), dto.getYear(), dto.getCompany(), dto.getModel());
+        return new Vehicle(dto.getVehicleType(), dto.getVehicleNumber(), dto.getVehicleYear(), dto.getVehicleCompany(), dto.getModel());
 
     }
 }

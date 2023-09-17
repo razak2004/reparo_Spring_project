@@ -5,22 +5,22 @@ package com.reparo.dto.vehicle;
 public class VehicleRequestDto {
 
     private int userId;
-    private int type;
+    private int vehicleType;
     private String vehicleNumber;
-    private int year;
-    private String company;
-    private String model;
+    private int vehicleYear;
+    private String vehicleCompany;
+    private String vehicleModel;
     public VehicleRequestDto() {
     }
 
     // Constructor with parameters
     public VehicleRequestDto(int userId, int type, String vehicleNumber, int year, String company, String model) {
         this.userId = userId;
-        this.type = type;
+        this.vehicleType = type;
         this.vehicleNumber = vehicleNumber;
-        this.year = year;
-        this.company = company;
-        this.model = model;
+        this.vehicleYear = year;
+        this.vehicleCompany = company;
+        this.vehicleModel = model;
     }
 
 
@@ -32,12 +32,12 @@ public class VehicleRequestDto {
         this.userId = userId;
     }
 
-    public int getType() {
-        return type;
+    public int getVehicleType() {
+        return vehicleType;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setVehicleType(int type) {
+        this.vehicleType = type;
     }
 
     public String getVehicleNumber() {
@@ -48,28 +48,28 @@ public class VehicleRequestDto {
         this.vehicleNumber = vehicleNumber;
     }
 
-    public int getYear() {
-        return year;
+    public int getVehicleYear() {
+        return vehicleYear;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setVehicleYear(int year) {
+        this.vehicleYear = year;
     }
 
-    public String getCompany() {
-        return company;
+    public String getVehicleCompany() {
+        return vehicleCompany;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setVehicleCompany(String company) {
+        this.vehicleCompany = company;
     }
 
     public String getModel() {
-        return model;
+        return vehicleModel;
     }
 
     public void setModel(String model) {
-        this.model = model;
+        this.vehicleModel = model;
     }
 
 }

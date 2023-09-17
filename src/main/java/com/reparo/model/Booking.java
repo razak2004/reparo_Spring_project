@@ -2,7 +2,6 @@ package com.reparo.model;
 
 import jakarta.persistence.*;
 import java.util.Date;
-
 @Entity
 @Table(name = "booking")
 public class Booking {
@@ -13,7 +12,7 @@ public class Booking {
   private int bookingId;
 
   @ManyToOne
-  @JoinColumn(name = "vehicle_id",nullable = false)
+  @JoinColumn(name = "vehicle_id", nullable = false)
   private Vehicle vehicle;
 
   @ManyToOne
@@ -29,10 +28,10 @@ public class Booking {
   @Column(name = "booking_city", nullable = false)
   private String bookingCity;
 
-  @Column(name = "booking_state",  nullable = false)
+  @Column(name = "booking_state", nullable = false)
   private String bookingState;
 
-  @Column(name = "booking_country",  nullable = false)
+  @Column(name = "booking_country", nullable = false)
   private String bookingCountry;
 
   @Column(name = "booking_address", nullable = false)
@@ -44,7 +43,7 @@ public class Booking {
   @Column(name = "accept_status")
   private boolean acceptStatus;
 
-  @Column(name = "problem",  nullable = false)
+  @Column(name = "problem", nullable = false)
   private String problem;
 
   @Column(name = "booking_date")
@@ -63,5 +62,135 @@ public class Booking {
 
   // You can generate constructors, getters, and setters using your IDE or manually.
 
+  // Getters and setters for each field
+
+  public int getBookingId() {
+    return bookingId;
+  }
+
+  public void setBookingId(int bookingId) {
+    this.bookingId = bookingId;
+  }
+
+  public Vehicle getVehicle() {
+    return vehicle;
+  }
+
+  public void setVehicle(Vehicle vehicle) {
+    this.vehicle = vehicle;
+  }
+
+  public Workshop getWorkshop() {
+    return workshop;
+  }
+
+  public void setWorkshop(Workshop workshop) {
+    this.workshop = workshop;
+  }
+
+  public double getLatitude() {
+    return latitude;
+  }
+
+  public void setLatitude(double latitude) {
+    this.latitude = latitude;
+  }
+
+  public double getLongitude() {
+    return longitude;
+  }
+
+  public void setLongitude(double longitude) {
+    this.longitude = longitude;
+  }
+
+  public String getBookingCity() {
+    return bookingCity;
+  }
+
+  public void setBookingCity(String bookingCity) {
+    this.bookingCity = bookingCity;
+  }
+
+  public String getBookingState() {
+    return bookingState;
+  }
+
+  public void setBookingState(String bookingState) {
+    this.bookingState = bookingState;
+  }
+
+  public String getBookingCountry() {
+    return bookingCountry;
+  }
+
+  public void setBookingCountry(String bookingCountry) {
+    this.bookingCountry = bookingCountry;
+  }
+
+  public String getBookingAddress() {
+    return bookingAddress;
+  }
+
+  public void setBookingAddress(String bookingAddress) {
+    this.bookingAddress = bookingAddress;
+  }
+
+  public boolean isRequestStatus() {
+    return requestStatus;
+  }
+
+  public void setRequestStatus(boolean requestStatus) {
+    this.requestStatus = requestStatus;
+  }
+
+  public boolean isAcceptStatus() {
+    return acceptStatus;
+  }
+
+  public void setAcceptStatus(boolean acceptStatus) {
+    this.acceptStatus = acceptStatus;
+  }
+
+  public String getProblem() {
+    return problem;
+  }
+
+  public void setProblem(String problem) {
+    this.problem = problem;
+  }
+
+  public Date getBookingDate() {
+    return bookingDate;
+  }
+
+  public void setBookingDate(Date bookingDate) {
+    this.bookingDate = bookingDate;
+  }
+
+  public String getBookingTime() {
+    return bookingTime;
+  }
+
+  public void setBookingTime(String bookingTime) {
+    this.bookingTime = bookingTime;
+  }
+
+  public boolean isLive() {
+    return isLive;
+  }
+
+  public void setLive(boolean live) {
+    isLive = live;
+  }
+
+  public Boolean getIsRead() {
+    return isRead;
+  }
+
+  public void setIsRead(Boolean isRead) {
+    this.isRead = isRead;
+  }
 }
+
 
