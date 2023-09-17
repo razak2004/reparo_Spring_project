@@ -17,7 +17,7 @@ public class User {
     private boolean login;
     public User(){
 
-    } // default constructor 
+    } // default constructor
 
     public int getId() {
         return id;
