@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ReparoSpringApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ReparoSpringApplication.class, args);
+		             SpringApplication.run(ReparoSpringApplication.class, args);
 	}
 
 }
