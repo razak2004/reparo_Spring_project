@@ -76,6 +76,36 @@ import static org.junit.jupiter.api.Assertions.*;
 
     }
     @Test
+    void dateValidationTest(){
+        try {
+            assertTrue(validate.dateValidation("22-07-2023"));
+        } catch (ValidationException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void invalidDateValidation(){
+        ValidationException exception = assertThrows(ValidationException.class, () -> validate.dateValidation("223-07-2023"));
+
+        assertEquals("Invalid Date Format", exception.getMessage());
+
+    }
+     @Test
+     void timeValidationTest(){
+         try {
+             assertTrue(validate.timeValidation("12:45"));
+         } catch (ValidationException e) {
+             throw new RuntimeException(e);
+         }
+     }
+     @Test
+   void invalidTimeValidation(){
+         ValidationException exception = assertThrows(ValidationException.class, () -> validate.timeValidation("25:10"));
+
+         assertEquals("Invalid time Format", exception.getMessage());
+
+     }
+    @Test
     void addressValidation(){
         String address = "123  Main Street";
         try {

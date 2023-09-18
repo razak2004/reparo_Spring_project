@@ -1,26 +1,24 @@
 package com.reparo.validation;
 
+import com.reparo.dto.booking.BookingRequestDto;
 import com.reparo.dto.user.UserRequestDto;
 import com.reparo.exception.ValidationException;
+import com.reparo.model.Booking;
 import com.reparo.model.User;
 import com.reparo.model.Vehicle;
 import com.reparo.model.Workshop;
-import com.reparo.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validation {
-    @Autowired
-    private UserRepository userRepository;
 
     private static  final String STRING_REGEX = "^[A-Za-z\\s]+$";
     private static  final String PASS = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,10}$";
     private static  final String ADDRESS_PATTERN = "^[a-zA-Z0-9\\s.,'#\\-]+(\\s[A-Za-z0-9\\-#]+)?$";
     private static final String VEHICLE_NUMBER_PATTERN = "^[A-Z]{2}\\d{2}[A-Z]{2}\\d{4}$";
-
+    private static  final String DATE_PATTERN = "\\d{2}-\\d{2}-\\d{4}";
+    private static final String TIME_PATTERN = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
     public boolean stringValidation(String str, String name, int n) throws ValidationException {
         // Define a regular expression pattern for validating the string
         Pattern pat = Pattern.compile(STRING_REGEX);
@@ -113,6 +111,22 @@ public class Validation {
         }
         return price < 9999;
     }
+    public boolean dateValidation(String date) throws ValidationException{
+        Matcher match;
+        Pattern pat = Pattern.compile(DATE_PATTERN);
+        match = pat.matcher(date);
+        if(!match.matches())throw new ValidationException("Invalid Date Format");
+        return match.matches();
+
+    }
+    public boolean timeValidation(String time) throws ValidationException{
+        Matcher match;
+        Pattern pat = Pattern.compile(TIME_PATTERN);
+        match = pat.matcher(time);
+        if(!match.matches())throw new ValidationException("Invalid time Format");
+        return match.matches();
+
+    }
     public boolean doesNotContainAlphabets(String input) {
         // Use a regular expression to check if the string contains no alphabetic characters
         return input != null && !input.matches(".*[a-zA-Z].*");
@@ -165,5 +179,18 @@ public class Validation {
         vehicleYearValidation(vehicle.getYear());
         return true ;
     }
+    public boolean bookingCredentialValidation(Booking booking) throws ValidationException {
+        addressValidation(booking.getBookingAddress());
+        stringValidation(booking.getBookingCity(), "city",15);
+        stringValidation(booking.getBookingState(),"state",15 );
+        stringValidation(booking.getBookingCountry(),"country",15);
+        isValidLatitude(booking.getLatitude());
+        isValidLongitude(booking.getLongitude());
+        stringValidation(booking.getProblem(), "problem",40);
+        dateValidation(booking.getBookingDate());
+        timeValidation(booking.getBookingTime());
+        return true;
+    }
+
 
 }

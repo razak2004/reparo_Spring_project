@@ -5,7 +5,6 @@ import java.util.Date;
 @Entity
 @Table(name = "booking")
 public class Booking {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "booking_id")
@@ -47,7 +46,7 @@ public class Booking {
   private String problem;
 
   @Column(name = "booking_date")
-  private Date bookingDate;
+  private String bookingDate;
 
   @Column(name = "booking_time")
   private String bookingTime;
@@ -160,11 +159,11 @@ public class Booking {
     this.problem = problem;
   }
 
-  public Date getBookingDate() {
+  public String  getBookingDate() {
     return bookingDate;
   }
 
-  public void setBookingDate(Date bookingDate) {
+  public void setBookingDate(String bookingDate) {
     this.bookingDate = bookingDate;
   }
 
