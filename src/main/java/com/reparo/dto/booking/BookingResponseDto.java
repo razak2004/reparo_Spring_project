@@ -11,6 +11,15 @@ public class BookingResponseDto extends BookingRequestDto{
     private VehicleResponseDto vehicleInfo;
     private double distance ;
     private String time;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public boolean isAcceptStatus() {
         return acceptStatus;

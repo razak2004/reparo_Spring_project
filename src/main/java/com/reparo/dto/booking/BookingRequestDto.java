@@ -18,11 +18,11 @@ public class BookingRequestDto {
         return bookedCity;
     }
 
-    public double getBookedLatitude() {
+    public double  getBookedLatitude() {
         return bookedLatitude;
     }
 
-    public double getBookedLongitude() {
+    public double  getBookedLongitude() {
         return bookedLongitude;
     }
 

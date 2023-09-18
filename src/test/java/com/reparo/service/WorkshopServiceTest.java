@@ -1,4 +1,5 @@
 package com.reparo.service;
+import com.reparo.dto.workshop.WorkshopDistanceResponseDto;
 import com.reparo.dto.workshop.WorkshopResponseDto;
 import com.reparo.exception.ServiceException;
 import org.junit.jupiter.api.Assertions;
@@ -8,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
  class WorkshopServiceTest {
@@ -54,6 +55,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
     void workshopExistTest(){
         try {
            assertTrue(workshopService.isWorkshopExist(52)) ;
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void findNearByWorkshopTest(){
+        try {
+            List<WorkshopDistanceResponseDto> workshops = workshopService.findWorkshopsNearByArea(13.13493200000,80.24788780000,"chennai");
+            assertFalse(workshops.isEmpty());
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }

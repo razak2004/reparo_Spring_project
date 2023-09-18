@@ -21,7 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
             if(vehicleService!=null){
                 VehicleRequestDto dto = new VehicleRequestDto();
                 dto.setVehicleCompany("hero");
-                dto.setModel("splendor");
+                dto.setVehicleModel("splendor");
                 dto.setVehicleNumber("TN09AB1234");
                 dto.setVehicleType(2);
                 dto.setUserId(953);

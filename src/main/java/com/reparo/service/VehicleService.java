@@ -33,7 +33,7 @@ public class VehicleService {
         }
         return exist;
     }
-    public Vehicle addVehicle(VehicleRequestDto dto) throws ServiceException{
+    public int addVehicle(VehicleRequestDto dto) throws ServiceException{
         try {
             Vehicle vehicle1 =  new Vehicle();
             if(vehicleRepository!=null && service !=null && userRepository!=null){
@@ -45,7 +45,7 @@ public class VehicleService {
                 vehicle1 = vehicleRepository.save(vehicle);
             }
 
-            return vehicle1;
+            return vehicle1.getVehicleId();
         } catch (ServiceException | ValidationException e) {
             throw new ServiceException(e.getMessage());
         }

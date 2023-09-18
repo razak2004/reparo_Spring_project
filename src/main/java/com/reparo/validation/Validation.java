@@ -171,7 +171,7 @@ public class Validation {
     }
     public boolean vehicleCredentialValidation(Vehicle vehicle) throws ValidationException{
         stringValidation(vehicle.getCompany(), "company",15);
-        stringValidation(vehicle.getModel(), "model",15);
+        stringValidation(vehicle.getModel(), "model",30);
         vehicleNumberValidation(vehicle.getVehicleNumber());
         vehicleTypeValidation(vehicle.getType());
         vehicleYearValidation(vehicle.getYear());
@@ -179,9 +179,9 @@ public class Validation {
     }
     public boolean bookingCredentialValidation(Booking booking) throws ValidationException {
         addressValidation(booking.getBookingAddress());
-        stringValidation(booking.getBookingCity(), "city",15);
-        stringValidation(booking.getBookingState(),"state",15 );
-        stringValidation(booking.getBookingCountry(),"country",15);
+        stringValidation(booking.getBookingCity(), "city",25);
+        stringValidation(booking.getBookingState(),"state",25 );
+        stringValidation(booking.getBookingCountry(),"country",25);
         isValidLatitude(booking.getLatitude());
         isValidLongitude(booking.getLongitude());
         stringValidation(booking.getProblem(), "problem",40);

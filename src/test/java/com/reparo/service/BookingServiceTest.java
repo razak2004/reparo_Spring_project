@@ -2,13 +2,16 @@ package com.reparo.service;
 
 import com.reparo.dto.booking.BookingAcceptRequestDto;
 import com.reparo.dto.booking.BookingRequestDto;
+import com.reparo.dto.booking.BookingResponseDto;
+import com.reparo.dto.workshop.WorkshopDistanceResponseDto;
 import com.reparo.exception.ServiceException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class BookingServiceTest {
@@ -53,5 +56,24 @@ public class BookingServiceTest {
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }
+    }
+    @Test
+    void findNearByWorkshopTest(){
+        try {
+            List<WorkshopDistanceResponseDto> dto = service.getBookingNearWorkshops(8);
+            assertFalse(dto.isEmpty());
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void findNearByBookingTest(){
+        try {
+            List<BookingResponseDto> dto = service.getUnAcceptedBooking(13.13493200000,80.24788780000,"chennai");
+            assertFalse(dto.isEmpty());
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

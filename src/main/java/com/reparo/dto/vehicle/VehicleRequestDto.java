@@ -64,11 +64,11 @@ public class VehicleRequestDto {
         this.vehicleCompany = company;
     }
 
-    public String getModel() {
+    public String getVehicleModel() {
         return vehicleModel;
     }
 
-    public void setModel(String model) {
+    public void setVehicleModel(String model) {
         this.vehicleModel = model;
     }
 
