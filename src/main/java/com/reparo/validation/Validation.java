@@ -1,6 +1,4 @@
 package com.reparo.validation;
-
-import com.reparo.dto.booking.BookingRequestDto;
 import com.reparo.dto.user.UserRequestDto;
 import com.reparo.exception.ValidationException;
 import com.reparo.model.Booking;
@@ -17,7 +15,7 @@ public class Validation {
     private static  final String PASS = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,10}$";
     private static  final String ADDRESS_PATTERN = "^[a-zA-Z0-9\\s.,'#\\-]+(\\s[A-Za-z0-9\\-#]+)?$";
     private static final String VEHICLE_NUMBER_PATTERN = "^[A-Z]{2}\\d{2}[A-Z]{2}\\d{4}$";
-    private static  final String DATE_PATTERN = "\\d{2}-\\d{2}-\\d{4}";
+    private static  final String DATE_PATTERN = "\\d{4}-\\d{2}-\\d{2}";
     private static final String TIME_PATTERN = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
     public boolean stringValidation(String str, String name, int n) throws ValidationException {
         // Define a regular expression pattern for validating the string

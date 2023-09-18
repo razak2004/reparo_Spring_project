@@ -1,7 +1,6 @@
 package com.reparo.service;
 import com.reparo.dto.workshop.WorkshopResponseDto;
 import com.reparo.exception.ServiceException;
-import com.reparo.repository.WorkshopRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @SpringBootTest
  class WorkshopServiceTest {
-    @Autowired
-    private WorkshopRepository workshopRepository;
     @Autowired
     private WorkshopService workshopService;
 
@@ -49,6 +48,14 @@ import java.util.List;
             Assertions.assertFalse(workshops.isEmpty());
         } catch (ServiceException e) {
             throw new RuntimeException(e.getMessage());
+        }
+    }
+    @Test
+    void workshopExistTest(){
+        try {
+           assertTrue(workshopService.isWorkshopExist(52)) ;
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
         }
     }
 }

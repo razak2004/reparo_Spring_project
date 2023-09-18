@@ -32,7 +32,14 @@ public class WorkshopService {
 
     private final WorkshopMapper map =  new WorkshopMapper();
 
-
+    public boolean isWorkshopExist(int id) throws ServiceException{
+        boolean exist = false;
+        if(workshopRepository!=null){
+            exist =  workshopRepository.existsById(id);
+            if(!exist) throw  new ServiceException("workshop Not present");
+        }
+        return exist;
+    }
 
     public int createWorkshop(WorkshopRequestDto dto) throws ServiceException{
         int id = 0 ;
