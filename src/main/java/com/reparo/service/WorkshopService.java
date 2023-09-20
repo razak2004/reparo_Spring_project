@@ -1,6 +1,10 @@
 package com.reparo.service;
 
+import com.reparo.datamapper.BookingMapper;
+import com.reparo.dto.booking.BookingResponseDto;
 import com.reparo.dto.workshop.WorkshopDistanceResponseDto;
+import com.reparo.model.Booking;
+import com.reparo.repository.BookingRepository;
 import com.reparo.validation.Validation;
 import com.reparo.datamapper.WorkshopMapper;
 import com.reparo.dto.workshop.WorkshopRequestDto;
@@ -26,12 +30,15 @@ public class WorkshopService {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private BookingRepository bookingRepository;
 
 
     private final Validation validation = new Validation();
 
 
     private final WorkshopMapper map =  new WorkshopMapper();
+    private final BookingMapper bookingMap =  new BookingMapper();
 
     public double calculateDistance(double lat1 , double lon1 , double lat2 , double lon2){
         // Radius of the Earth in kilometers
@@ -128,6 +135,63 @@ public class WorkshopService {
             throw new ServiceException(e.getMessage());
         }
 
+
+    }
+    public List<BookingResponseDto> getUnAcceptedBooking(double lat,double lon,String city) throws ServiceException{
+        try {
+            List<BookingResponseDto> response =  new ArrayList<>();
+            validation.stringValidation(city,"city",25);
+            String[]arr =  city.toLowerCase().split(" ");
+            if(bookingRepository!=null){
+                List<Booking> bookings =  bookingRepository.findByBookingCity(arr[0]);
+                if(bookings.isEmpty()) throw new ServiceException("No Bookings Available");
+                for (Booking book:bookings) {
+                    if(!book.isAcceptStatus()){
+                        BookingResponseDto responseDto =  bookingMap.mapBookingToResponse(book);
+                        double dis  = calculateDistance(lat,lon,book.getLatitude(),book.getLongitude());
+                        responseDto.setDistance(dis);
+                        response.add(responseDto);
+                    }
+
+                }
+
+            }
+            return response;
+
+        } catch (ValidationException e) {
+            throw new ServiceException(e.getMessage());
+        }
+
+    }
+
+    public List<BookingResponseDto> getAllUnAcceptedBookingByWorkshopId(int id) throws ServiceException{
+        try {
+            List<BookingResponseDto> resp =  new ArrayList<>();
+            isWorkshopExist(id);
+            if(workshopRepository!=null){
+                Workshop  workshop = workshopRepository.findById(id);
+                resp =  getUnAcceptedBooking(workshop.getLatitude(),workshop.getLongitude(), workshop.getCity());
+            }
+            return resp;
+        } catch (ServiceException e) {
+            throw new ServiceException(e.getMessage());
+        }
+    }
+    public WorkshopResponseDto getWorkshopByUserId(int userId ) throws ServiceException{
+        try {
+            WorkshopResponseDto dto = new WorkshopResponseDto();
+            userService.isUserExist(userId);
+            if(workshopRepository!=null){
+                Workshop workshop =  workshopRepository.findByUserId(userId);
+                dto =  map.mapWorkshopToResponse(workshop);
+
+
+            }
+            return dto;
+
+        } catch (ServiceException e) {
+            throw new ServiceException(e.getMessage());
+        }
 
     }
 

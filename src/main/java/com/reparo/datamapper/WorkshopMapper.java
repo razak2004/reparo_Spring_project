@@ -10,7 +10,7 @@ public class WorkshopMapper {
         Workshop workshop = new Workshop();
         workshop.setWorkShopName(data.getWorkshopName());
         workshop.setImage(data.getWorkshopImage());
-        workshop.setCity(data.getWorkshopCity());
+        workshop.setCity(data.getWorkshopCity().toLowerCase());
         workshop.setState(data.getWorkshopState());
         workshop.setCountry(data.getWorkshopCountry());
         workshop.setAddress(data.getWorkshopAddress());

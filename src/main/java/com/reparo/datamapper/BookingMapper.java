@@ -10,7 +10,7 @@ public class BookingMapper {
 
     public Booking mapRequestToBooking(BookingRequestDto requestDto){
         Booking booking = new Booking();
-        booking.setBookingCity(requestDto.getBookedCity());
+        booking.setBookingCity(requestDto.getBookedCity().toLowerCase());
         booking.setBookingCountry(requestDto.getBookedCountry());
         booking.setBookingState(requestDto.getBookedState());
         booking.setBookingAddress(requestDto.getBookedAddress());
@@ -19,7 +19,7 @@ public class BookingMapper {
         booking.setProblem(requestDto.getProblem());
         return booking;
     }
-    public BookingResponseDto mapUnAcceptBookingToResponse(Booking booking){
+    public BookingResponseDto mapBookingToResponse(Booking booking){
         BookingResponseDto dto =  new BookingResponseDto();
         dto.setBookingId(booking.getBookingId());
         dto.setLive(booking.isLive());
@@ -32,8 +32,13 @@ public class BookingMapper {
         dto.setVehicleInfo(map.mapVehicleToResponse(booking.getVehicle()));
         dto.setTime(booking.getBookingTime());
         dto.setDate(booking.getBookingDate());
+        if(booking.getWorkshop() !=null){
+            dto.setWorkshopInfo(workshopMap.mapWorkshopToResponse(booking.getWorkshop()));
+            dto.setOtp(booking.getOtp());
+        }
         return dto;
 
 
     }
+
 }

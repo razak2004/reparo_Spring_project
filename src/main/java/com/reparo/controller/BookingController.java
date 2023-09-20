@@ -1,6 +1,10 @@
 package com.reparo.controller;
 
+
+import com.reparo.dto.booking.BookingAcceptRequestDto;
 import com.reparo.dto.booking.BookingRequestDto;
+
+import com.reparo.dto.booking.BookingResponseDto;
 import com.reparo.dto.workshop.WorkshopDistanceResponseDto;
 import com.reparo.exception.ServiceException;
 import com.reparo.service.BookingService;
@@ -26,8 +30,14 @@ public class BookingController {
         } catch (ServiceException e) {
             return ResponseEntity.ok(e.getMessage());
         }
-
-
+    }
+    @PostMapping("/acceptBooking")
+    public ResponseEntity<BookingResponseDto> acceptBooking(@RequestBody BookingAcceptRequestDto request){
+        try {
+            return ResponseEntity.ok(bookingService.acceptBooking(request));
+        } catch (ServiceException e) {
+            return ResponseEntity.noContent().build();
+        }
     }
     @GetMapping("/nearWorkshops")
     public ResponseEntity<List<WorkshopDistanceResponseDto>> getNearByWorkshop(@RequestParam("bookingId")int bookingId){
@@ -37,5 +47,16 @@ public class BookingController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/getBookingById")
+    public ResponseEntity<BookingResponseDto> getBookingById(@RequestParam("bookingId") int bookingId ){
+        try {
+            return ResponseEntity.ok(bookingService.getBookingById(bookingId));
+        } catch (ServiceException e) {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+
 
 }

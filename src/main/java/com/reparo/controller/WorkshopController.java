@@ -1,4 +1,5 @@
 package com.reparo.controller;
+import com.reparo.dto.booking.BookingResponseDto;
 import com.reparo.dto.workshop.WorkshopRequestDto;
 import com.reparo.dto.workshop.WorkshopResponseDto;
 import com.reparo.exception.ServiceException;
@@ -40,11 +41,25 @@ private  WorkshopService workshopService;
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    @GetMapping("/hello")
-    public String hello(){
-        return "hello";
-    }
+    @GetMapping("getWorkshopByUserId")
+        public ResponseEntity<WorkshopResponseDto> getWorkshopByUserId(@RequestParam int userId){
+        try {
+            WorkshopResponseDto dto =  workshopService.getWorkshopByUserId(userId);
+            return ResponseEntity.ok(dto);
+        } catch (ServiceException e) {
+            return ResponseEntity.noContent().build();
+        }
 
+    }
+    @GetMapping("/getAllUnAcceptedBooking")
+    public ResponseEntity<List<BookingResponseDto>> getAllUnAcceptedBooking(@RequestParam int workshopId){
+        try {
+            List<BookingResponseDto> bookings  =  workshopService.getAllUnAcceptedBookingByWorkshopId(workshopId);
+            return ResponseEntity.ok(bookings);
+        } catch (ServiceException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
 
 

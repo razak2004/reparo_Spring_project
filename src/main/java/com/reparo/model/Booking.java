@@ -57,6 +57,9 @@ public class Booking {
   @Column(name = "is_read")
   private Boolean isRead;
 
+  @Column(name = "otp")
+  private int otp;
+
   // Constructors, getters, and setters (omitted for brevity)
 
   // You can generate constructors, getters, and setters using your IDE or manually.
@@ -65,6 +68,22 @@ public class Booking {
 
   public int getBookingId() {
     return bookingId;
+  }
+
+  public Boolean getRead() {
+    return isRead;
+  }
+
+  public int getOtp() {
+    return otp;
+  }
+
+  public void setOtp(int otp) {
+    this.otp = otp;
+  }
+
+  public void setRead(Boolean read) {
+    isRead = read;
   }
 
   public void setBookingId(int bookingId) {

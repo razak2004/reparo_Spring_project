@@ -15,12 +15,10 @@ import com.reparo.repository.WorkshopRepository;
 import com.reparo.validation.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 @Service
 public class BookingService {
     @Autowired
@@ -73,7 +71,7 @@ public class BookingService {
 
     }
 
-    public boolean acceptBooking(BookingAcceptRequestDto accept) throws ServiceException{
+    public BookingResponseDto acceptBooking(BookingAcceptRequestDto accept) throws ServiceException{
         try {
             Booking booking =  new Booking();
             if(bookingRepository!=null && workshopRepository!=null){
@@ -83,10 +81,11 @@ public class BookingService {
                 Booking book = bookingRepository.findByBookingId(accept.getBookingId());
                 book.setAcceptStatus(true);
                 book.setWorkshop(workshop);
+                book.setOtp(accept.getOtp());
                 booking = bookingRepository.save(book);
             }
 
-          return  booking.isAcceptStatus();
+          return  map.mapBookingToResponse(booking);
 
         } catch (ServiceException e) {
             throw new ServiceException(e.getMessage());
@@ -107,30 +106,22 @@ public class BookingService {
             throw new ServiceException(e.getMessage());
         }
     }
-    public List<BookingResponseDto> getUnAcceptedBooking(double lat,double lon,String city) throws ServiceException{
-        try {
-            List<BookingResponseDto> response =  new ArrayList<>();
-            validate.stringValidation(city,"city",25);
-            String[]arr =  city.toLowerCase().split(" ");
-            if(bookingRepository!=null){
-                List<Booking> bookings =  bookingRepository.findByBookingCity(arr[0]);
-                if(bookings.isEmpty()) throw new ServiceException("No Bookings Available");
-                for (Booking book:bookings) {
-                    if(!book.isAcceptStatus()){
-                        BookingResponseDto responseDto =  map.mapUnAcceptBookingToResponse(book);
-                        double dis  = workshopService.calculateDistance(lat,lon,book.getLatitude(),book.getLongitude());
-                        responseDto.setDistance(dis);
-                        response.add(responseDto);
-                    }
 
-                }
+    public  BookingResponseDto getBookingById(int id) throws ServiceException{
+        BookingResponseDto response =  new BookingResponseDto();
+        try {
+            isBookingExists(id);
+            if(bookingRepository!=null) {
+                Booking book  =  bookingRepository.findByBookingId(id);
+                response = map.mapBookingToResponse(book);
 
             }
             return response;
 
-        } catch (ValidationException e) {
+        } catch (ServiceException e) {
             throw new ServiceException(e.getMessage());
         }
+    }
+
 
     }
-}

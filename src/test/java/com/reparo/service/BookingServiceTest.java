@@ -51,8 +51,9 @@ public class BookingServiceTest {
         BookingAcceptRequestDto booking =  new BookingAcceptRequestDto();
         booking.setBookingId(2);
         booking.setWorkshopId(2);
+        booking.setOtp(1234);
         try {
-            assertTrue(service.acceptBooking(booking));
+            assertNotNull(service.acceptBooking(booking));
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }
@@ -66,14 +67,5 @@ public class BookingServiceTest {
             throw new RuntimeException(e);
         }
     }
-    @Test
-    void findNearByBookingTest(){
-        try {
-            List<BookingResponseDto> dto = service.getUnAcceptedBooking(13.13493200000,80.24788780000,"chennai");
-            assertFalse(dto.isEmpty());
-        } catch (ServiceException e) {
-            throw new RuntimeException(e);
-        }
 
-    }
 }

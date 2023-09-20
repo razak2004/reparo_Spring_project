@@ -1,4 +1,5 @@
 package com.reparo.service;
+import com.reparo.dto.booking.BookingResponseDto;
 import com.reparo.dto.workshop.WorkshopDistanceResponseDto;
 import com.reparo.dto.workshop.WorkshopResponseDto;
 import com.reparo.exception.ServiceException;
@@ -64,6 +65,23 @@ import static org.junit.jupiter.api.Assertions.*;
         try {
             List<WorkshopDistanceResponseDto> workshops = workshopService.findWorkshopsNearByArea(13.13493200000,80.24788780000,"chennai");
             assertFalse(workshops.isEmpty());
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void findNearByBooking(){
+        try {
+            List<BookingResponseDto> dto  = workshopService.getAllUnAcceptedBookingByWorkshopId(202);
+            assertTrue(dto.isEmpty());
+        } catch (ServiceException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void getWorkshopByUserIdTest()   {
+        try {
+            assertNotNull(workshopService.getWorkshopByUserId(1302));
         } catch (ServiceException e) {
             throw new RuntimeException(e);
         }

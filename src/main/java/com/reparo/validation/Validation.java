@@ -1,10 +1,8 @@
 package com.reparo.validation;
 import com.reparo.dto.user.UserRequestDto;
 import com.reparo.exception.ValidationException;
-import com.reparo.model.Booking;
-import com.reparo.model.User;
-import com.reparo.model.Vehicle;
-import com.reparo.model.Workshop;
+import com.reparo.model.*;
+
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -42,6 +40,7 @@ public class Validation {
         }
         return match.matches();
     }
+
     public boolean numberValidation(long number) throws ValidationException {
         // Convert the long number to a string for validation
         String str = Long.toString(number);
@@ -171,7 +170,6 @@ public class Validation {
     }
     public boolean vehicleCredentialValidation(Vehicle vehicle) throws ValidationException{
         stringValidation(vehicle.getCompany(), "company",15);
-        stringValidation(vehicle.getModel(), "model",30);
         vehicleNumberValidation(vehicle.getVehicleNumber());
         vehicleTypeValidation(vehicle.getType());
         vehicleYearValidation(vehicle.getYear());
@@ -188,6 +186,13 @@ public class Validation {
         dateValidation(booking.getBookingDate());
         timeValidation(booking.getBookingTime());
         return true;
+    }
+
+    public boolean serviceCredentialValidation(ServiceList service) throws ValidationException{
+        stringValidation(service.getServiceName(), "service name", 20);
+        priceValidation(service.getServicePrice());
+        return true;
+
     }
 
 
